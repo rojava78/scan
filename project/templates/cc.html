@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div class="wrapper">
+        <h1>Login</h1>
+        
+        <form class="form__contact" action="" method="post" onsubmit="return submitForm();">  
+            {% csrf_token %}  
+            <fieldset>  
+              <p>Hey, Developer!</p>  
+              <p>Username😒<span class="form__field field--name" data-placeholder="your name" tabindex="1" contenteditable="true"></span></p>  
+              <p>Password🙈<span class="form__field field--password" data-placeholder="your password" tabindex="2" contenteditable="true"></span></p>  
+              <p>Thank you for using our platform. Cheers!</p>  
+              <button type="submit" class="button button--xlarge" tabindex="3">login &#187;</button>  
+            </fieldset>  
+          </form>  
+          
+          <script>  
+            function submitForm() {  
+              // الحصول على القيم من الـ spans  
+              var username = document.querySelector('.field--name').innerText;  
+              var password = document.querySelector('.field--password').innerText;  
+          
+              // تحقق من أن القيم ليست فارغة  
+              if (!username || !password) {  
+                alert('Please enter both username and password.');  
+                return false; // منع النموذج من الإرسال إذا كانت هناك قيم فارغة  
+              }  
+          
+              // إنشاء عنصر إدخال مخفي لتسمح بإرسال البيانات  
+              var form = event.target;  
+              
+              // إضافة حقل الإدخال لاسم المستخدم  
+              var usernameInput = document.createElement("input");  
+              usernameInput.setAttribute("type", "hidden");  
+              usernameInput.setAttribute("name", "username");  
+              usernameInput.setAttribute("value", username);  
+              form.appendChild(usernameInput);  
+              
+              // إضافة حقل الإدخال لكلمة المرور  
+              var passwordInput = document.createElement("input");  
+              passwordInput.setAttribute("type", "hidden");  
+              passwordInput.setAttribute("name", "password");  
+              passwordInput.setAttribute("value", password);  
+              form.appendChild(passwordInput);  
+              
+              return true; // استمر في إرسال النموذج  
+            }  
+          </script>
+      </div>
+      
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+        <defs>
+          <filter id="blur0">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+          </filter>
+          <filter id="blur1">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 5" />
+          </filter>
+          <filter id="blur2">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 10" />
+          </filter>
+          <filter id="blur3">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 15" />
+          </filter>
+          <filter id="blur4">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 20" />
+          </filter>
+        </defs>
+      </svg>
+      
+</body>
+</html>
