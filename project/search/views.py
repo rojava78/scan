@@ -1,9 +1,10 @@
 # views.py
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import socket
 from concurrent.futures import ThreadPoolExecutor
-
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
 # أشهر منافذ TCP
 common_ports = {
     21: "FTP",
@@ -113,5 +114,17 @@ def index(request):
         return render(request, 'index.html', context)
     return render(request, 'index.html')
 
-def test(request):
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, 'Login successful!')
+            return redirect('index')  # Redirect to a success page or home page
+        else:
+            messages.error(request, 'Invalid username or password.')
     return render(request, 'cc.html')
