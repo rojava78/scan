@@ -5,6 +5,10 @@ import socket
 from concurrent.futures import ThreadPoolExecutor
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+def view_(request):
+    return render(request, 'cc.html')
 # أشهر منافذ TCP
 common_ports = {
     21: "FTP",
@@ -96,7 +100,7 @@ def scan_ip(ip):
             open_ports.append(port)
     
     return open_ports 
-
+@login_required(login_url='loginn')
 def index(request):
     if request.method == 'POST':
         ip_target = request.POST.get('ip_target')
@@ -127,4 +131,7 @@ def login(request):
             return redirect('index')  # Redirect to a success page or home page
         else:
             messages.error(request, 'Invalid username or password.')
+    return render(request, 'cc.html')
+
+def view_(request):
     return render(request, 'cc.html')
