@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light");
 ::selection {
   color: #fff;
-  background: #9FBE5A; }
+  background: #9FBE5A;
+ }
 
 body {
   width: 100vw;

@@ -1,0 +1,71 @@
+Port: 21 (FTP)
+Response:
+220 BlueEliteTech FTP server ready.
+
+-------------------------------------------------
+Port: 22 (SSH)
+Response:
+SSH-2.0-OpenSSH_8.2
+
+-------------------------------------------------
+Port: 80 (HTTP)
+Response:
+HTTP/1.1 200 OK
+Server: nginx
+Date: Tue, 27 Aug 2024 13:52:01 GMT
+Content-Type: text/html
+Content-Length: 544
+Last-Modified: Sat, 24 Aug 2024 06:12:48 GMT
+Connection: keep-alive
+Keep-Alive: timeout=20
+ETag: "66c979e0-220"
+Cache-Control: no-cache
+Accept-Ranges: bytes
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="hidden" id="http" name="http" value="5000">
+        <input type="hidden" id="https" name="https" value="5001">
+        <input type="hidden" id="prefer_https" name="prefer_https" value="false">
+    </body>
+    <script type="text/javascript">
+        var protocol=location.protocol;
+        var port=location.protocol === "https:" ? 5001 : 5000;
+        var URL=protocol+"//"+location.hostname+":"+port+location.pathname+location.search;
+        location.replace(URL);
+    </script>
+</html>
+
+-------------------------------------------------
+Port: 443 (HTTPS)
+Response:
+HTTP/1.1 400 Bad Request
+Server: nginx
+Date: Tue, 27 Aug 2024 13:52:02 GMT
+Content-Type: text/html
+Content-Length: 248
+Connection: close
+
+<html>
+<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<center>The plain HTTP request was sent to HTTPS port</center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+-------------------------------------------------
+Port: 1194 (OpenVPN)
+Response:
+
+-------------------------------------------------
+Port: 1433 (Microsoft SQL Server)
+Response:
+
+-------------------------------------------------
+Port: 1723 (PPTP)
+Response:
+
+-------------------------------------------------

@@ -1,0 +1,6 @@
+Port: 22 (SSH)
+Response:
+SSH-2.0-OpenSSH_for_Windows_8.6
+Invalid SSH identification string.
+
+-------------------------------------------------

@@ -5,8 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Document</title>
+    <title>login</title>
     <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .form__field {
+            display: inline-block;
+            min-width: 200px;
+        }
+        
+        .form__field.field--password {
+            font-size: 25px;
+            letter-spacing: 2px;
+        }
+
+        .form__field.field--name {
+            font-size: 26px;
+        }
+        
+        .form__field.field--name input,
+        .form__field.field--password input {
+            border: none;
+            outline: none;
+            color: darkgoldenrod;
+            font-size: inherit;
+            letter-spacing: inherit;
+            width: 100%;
+            box-sizing: border-box;
+            background: none;
+            font-family: inherit; /* تأكد من استخدام نفس الخط */
+        }
         
     </style>
 </head>
@@ -19,25 +49,45 @@
     <div class="wrapper">
         <h1>Login</h1>
         
-        <form class="form__contact" action="" method="post" onsubmit="return submitForm();">  
+        <form class="form__contact" action="{% url 'login' %}" method="post" onsubmit="return submitForm();">  
             {% csrf_token %}  
             <fieldset>  
               <p>Hey, Developer!</p>  
-              <p>Username😒<span class="form__field field--name" data-placeholder="your name" tabindex="1" contenteditable="true"></span></p>  
-              <p>Password🙈<span class="form__field field--password" data-placeholder="your password" tabindex="2" contenteditable="true"></span></p>  
+              <p>Username <span id="username-emoji">😴</span><span class="form__field field--name"><input type="text" placeholder="Username" tabindex="1" oninput="updateEmojis()"></span></p>  
+              <p>Password <span id="password-emoji">🙊</span><span class="form__field field--password"><input type="password" placeholder="your password" tabindex="2" id="password-input" oninput="updateEmojis()"></span></p>  
               <p>Thank you for using our platform. Cheers!</p>  
               <button type="submit" class="button button--xlarge" tabindex="3">login &#187;</button>  
             </fieldset>  
           </form>  
           
           <script>  
+            function updateEmojis() {
+              var usernameField = document.querySelector('.field--name input');
+              var usernameEmoji = document.getElementById('username-emoji');
+              
+              var passwordField = document.querySelector('.field--password input');
+              var passwordEmoji = document.getElementById('password-emoji');
+              
+              if (usernameField.value.trim() === '') {
+                usernameEmoji.innerText = '😴'; // رمز تعبيري للحقل الفارغ
+              } else {
+                usernameEmoji.innerText = '😒'; // رمز تعبيري عند وجود نص
+              }
+              
+              if (passwordField.value.trim() === '') {
+                passwordEmoji.innerText = '🙊'; // رمز تعبيري للحقل الفارغ
+              } else {
+                passwordEmoji.innerText = '🙈'; // رمز تعبيري عند وجود نص
+              }
+            }
+            
             function submitForm() {  
-              // الحصول على القيم من الـ spans  
-              var username = document.querySelector('.field--name').innerText;  
-              var password = document.querySelector('.field--password').innerText;  
+              // الحصول على القيم من الـ inputs  
+              var username = document.querySelector('.field--name input').value.trim();  
+              var password = document.querySelector('.field--password input').value.trim();  
           
               // تحقق من أن القيم ليست فارغة  
-              if (!username || !password) {  
+              if (!username || !password || username === 'your name' || password === 'your password') {  
                 alert('Please enter both username and password.');  
                 return false; // منع النموذج من الإرسال إذا كانت هناك قيم فارغة  
               }  
@@ -60,7 +110,10 @@
               form.appendChild(passwordInput);  
               
               return true; // استمر في إرسال النموذج  
-            }  
+            }
+
+            document.querySelector('.field--name input').addEventListener('input', updateEmojis);
+            document.querySelector('.field--password input').addEventListener('input', updateEmojis);
           </script>
       </div>
       
